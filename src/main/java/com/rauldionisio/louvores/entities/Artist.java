@@ -1,15 +1,18 @@
 package com.rauldionisio.louvores.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Music implements Serializable{
+public class Artist implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,50 +20,33 @@ public class Music implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@Lob
-	private StringBuffer lyrics;
 	
-	private Artist artist;
+	@OneToMany 
+	@JoinColumn(name = "artist_id") 
+	private List<Album> albuns = new ArrayList<>();
 	
-	public Music() {}
-	
-	
-	
-	public Music(Long id, String name, StringBuffer lyrics) {
+	public Artist() {}
+
+	public Artist(Long id, String name) {
 		this.id = id;
 		this.name = name;
-		this.lyrics = lyrics;
 	}
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public StringBuffer getLyrics() {
-		return lyrics;
-	}
-	public void setLyrics(StringBuffer lyrics) {
-		this.lyrics = lyrics;
-	}
-	
-	public Artist getArtist() {
-		return artist;
-	}
-
-
-
-	public void setArtist(Artist artist) {
-		this.artist = artist;
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -71,8 +57,6 @@ public class Music implements Serializable{
 		return result;
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,7 +65,7 @@ public class Music implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Music other = (Music) obj;
+		Artist other = (Artist) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -97,8 +81,11 @@ public class Music implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Music [id=" + id + ", name=" + name + "]";
+		return "Artist [id=" + id + ", name=" + name + "]";
 	}
-
+	
+	
+	
+	
 
 }

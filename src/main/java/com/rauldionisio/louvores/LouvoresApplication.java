@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Music;
 import com.rauldionisio.louvores.repositories.MusicRepository;
 
@@ -35,6 +36,9 @@ public class LouvoresApplication implements CommandLineRunner {
 				+ "Viverei eu só pra te amar\n"
 				+ "Amar-te, amar-te, amar-te\n"
 				+ "E dar a vida só por ti"));
+		Artist artist = new Artist(null, "Davidson Silva");
+		music.setArtist(artist);
+		
 		musicRepository.save(music);
 		
 	}

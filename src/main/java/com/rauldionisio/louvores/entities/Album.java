@@ -6,10 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Music implements Serializable{
+public class Album implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,44 +17,44 @@ public class Music implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@Lob
-	private StringBuffer lyrics;
 	
+	@ManyToOne 
 	private Artist artist;
 	
-	public Music() {}
 	
+	public Album() {}
+
 	
-	
-	public Music(Long id, String name, StringBuffer lyrics) {
+	public Album(Long id, String name, Artist artist) {
 		this.id = id;
 		this.name = name;
-		this.lyrics = lyrics;
+		this.artist = artist;
 	}
-
+	
+	
 	public Long getId() {
 		return id;
 	}
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 	public String getName() {
 		return name;
 	}
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public StringBuffer getLyrics() {
-		return lyrics;
-	}
-	public void setLyrics(StringBuffer lyrics) {
-		this.lyrics = lyrics;
-	}
-	
+
+
 	public Artist getArtist() {
 		return artist;
 	}
-
 
 
 	public void setArtist(Artist artist) {
@@ -71,8 +71,6 @@ public class Music implements Serializable{
 		return result;
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,7 +79,7 @@ public class Music implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Music other = (Music) obj;
+		Album other = (Album) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -97,8 +95,7 @@ public class Music implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Music [id=" + id + ", name=" + name + "]";
+		return "Album [id=" + id + ", name=" + name + "]";
 	}
-
-
+	
 }
