@@ -1,12 +1,16 @@
 package com.rauldionisio.louvores.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Album implements Serializable{
@@ -21,14 +25,21 @@ public class Album implements Serializable{
 	@ManyToOne 
 	private Artist artist;
 	
+	@ManyToOne
+	@JoinColumn(name="style_id")
+	private Style style;
+	
+	@OneToMany
+	private List<Music>musicList = new ArrayList<>();
 	
 	public Album() {}
 
 	
-	public Album(Long id, String name, Artist artist) {
+	public Album(Long id, String name, Artist artist, Style style) {
 		this.id = id;
 		this.name = name;
 		this.artist = artist;
+		this.style = style;
 	}
 	
 	
@@ -59,6 +70,16 @@ public class Album implements Serializable{
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
+	}
+	
+
+	public Style getStyle() {
+		return style;
+	}
+
+
+	public void setStyle(Style style) {
+		this.style = style;
 	}
 
 

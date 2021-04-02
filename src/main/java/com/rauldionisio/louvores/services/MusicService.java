@@ -17,6 +17,10 @@ public class MusicService {
 	public List<Music>findAll(){
 		return repository.findAll();
 	}
+	
+	public List<Music>findByName(String name){
+		return repository.findByNameContainingIgnoreCase(name);
+	}
 
 
 }

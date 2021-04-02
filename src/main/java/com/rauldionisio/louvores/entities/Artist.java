@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Artist implements Serializable{
@@ -25,11 +28,17 @@ public class Artist implements Serializable{
 	@JoinColumn(name = "artist_id") 
 	private List<Album> albuns = new ArrayList<>();
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="style_id")
+	private Style style;
+	
 	public Artist() {}
 
-	public Artist(Long id, String name) {
+	public Artist(Long id, String name, Style style) {
 		this.id = id;
 		this.name = name;
+		this.style = style;
 	}
 
 	public Long getId() {
@@ -46,6 +55,14 @@ public class Artist implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Style getStyle() {
+		return style;
+	}
+
+	public void setStyle(Style style) {
+		this.style = style;
 	}
 
 	@Override
@@ -83,9 +100,5 @@ public class Artist implements Serializable{
 	public String toString() {
 		return "Artist [id=" + id + ", name=" + name + "]";
 	}
-	
-	
-	
-	
 
 }

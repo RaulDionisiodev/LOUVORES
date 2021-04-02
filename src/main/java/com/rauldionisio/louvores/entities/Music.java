@@ -1,12 +1,19 @@
 package com.rauldionisio.louvores.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Music implements Serializable{
@@ -20,17 +27,30 @@ public class Music implements Serializable{
 	@Lob
 	private StringBuffer lyrics;
 	
+	@ManyToOne
+	@JoinColumn(name="artist_id")
 	private Artist artist;
 	
+	@JsonIgnoreProperties({"artist", "style"})
+	@ManyToOne
+	@JoinColumn(name="album_id")
+	private Album album;
+	
+	@ManyToOne
+	@JoinColumn(name="style_id")
+	private Style style;
+	
+	@ManyToMany
+	private List<Moment> momentList = new ArrayList<>();
+	
 	public Music() {}
-	
-	
-	
+
 	public Music(Long id, String name, StringBuffer lyrics) {
 		this.id = id;
 		this.name = name;
 		this.lyrics = lyrics;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -41,6 +61,10 @@ public class Music implements Serializable{
 	public String getName() {
 		return name;
 	}
+	public List<Moment> getMomentList() {
+		return momentList;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -56,11 +80,25 @@ public class Music implements Serializable{
 	}
 
 
-
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
+	
+	public Style getStyle() {
+		return style;
+	}
 
+	public void setStyle(Style style) {
+		this.style = style;
+	}
+
+	public Album getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
 
 	@Override
 	public int hashCode() {
@@ -70,7 +108,6 @@ public class Music implements Serializable{
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
 
 
 	@Override
@@ -99,6 +136,4 @@ public class Music implements Serializable{
 	public String toString() {
 		return "Music [id=" + id + ", name=" + name + "]";
 	}
-
-
 }
