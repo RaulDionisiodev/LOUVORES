@@ -1,5 +1,6 @@
 package com.rauldionisio.louvores.ressources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Music;
+import com.rauldionisio.louvores.services.ArtistService;
 import com.rauldionisio.louvores.services.MusicService;
 
 @RestController
@@ -20,6 +23,9 @@ public class MusicRessource {
 	
 	@Autowired
 	private MusicService service;
+	
+	@Autowired
+	private ArtistService artistService;
 	
 	@GetMapping
 	public ResponseEntity<List<Music>>findAll(){
@@ -31,6 +37,20 @@ public class MusicRessource {
 	@RequestMapping(path = "/findByname", method = RequestMethod.GET)
 	public ResponseEntity<List<Music>>findbyname(@RequestParam("name") String name){
 		List<Music> music = service.findByName(name);
+		return ResponseEntity.ok(music);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = "/findbyArtist", method = RequestMethod.GET)
+	public ResponseEntity<List<Music>>findbyArtist(@RequestParam("name") String name){
+		List <Artist> artists = artistService.findByName(name);
+		
+		List<Music> music = new ArrayList<>();
+		
+		artists.forEach( a -> {
+			music.addAll(service.findByArtist(a));
+		});
 		return ResponseEntity.ok(music);
 		
 	}
