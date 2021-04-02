@@ -27,6 +27,7 @@ public class Music implements Serializable{
 	@Lob
 	private StringBuffer lyrics;
 	
+	@JsonIgnoreProperties({"style"})
 	@ManyToOne
 	@JoinColumn(name="artist_id")
 	private Artist artist;

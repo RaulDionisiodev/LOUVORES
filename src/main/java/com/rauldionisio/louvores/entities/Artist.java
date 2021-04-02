@@ -28,7 +28,6 @@ public class Artist implements Serializable{
 	@JoinColumn(name = "artist_id") 
 	private List<Album> albuns = new ArrayList<>();
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="style_id")
 	private Style style;
