@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Music;
+import com.rauldionisio.louvores.entities.Style;
 import com.rauldionisio.louvores.services.ArtistService;
 import com.rauldionisio.louvores.services.MusicService;
+import com.rauldionisio.louvores.services.StyleService;
 
 @RestController
 @RequestMapping(value ="/music")
@@ -26,6 +28,10 @@ public class MusicRessource {
 	
 	@Autowired
 	private ArtistService artistService;
+	
+	@Autowired
+	private StyleService styleService;
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Music>>findAll(){
@@ -50,6 +56,28 @@ public class MusicRessource {
 		
 		artists.forEach( a -> {
 			music.addAll(service.findByArtist(a));
+		});
+		return ResponseEntity.ok(music);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = "/findByMoment", method = RequestMethod.GET)
+	public ResponseEntity<List<Music>>findByMoment(@RequestParam("momentName") String momentName){
+		List<Music> musicList = service.findByMoment(momentName);	
+		return ResponseEntity.ok(musicList);
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = "/findbyStyle", method = RequestMethod.GET)
+	public ResponseEntity<List<Music>>findbyStyle(@RequestParam("styleName") String styleName){
+		
+		List<Style> styleList = styleService.findByName(styleName);
+		
+		List<Music> music = new ArrayList<>();
+		
+		styleList.forEach( style -> {
+			music.addAll(service.findByStyle(style));
 		});
 		return ResponseEntity.ok(music);
 		

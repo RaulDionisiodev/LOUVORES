@@ -15,13 +15,13 @@ public class Style implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String descripiton;
+	private String description;
 	
 	public Style() {}
 
-	public Style(Long id, String descripiton) {
+	public Style(Long id, String description) {
 		this.id = id;
-		this.descripiton = descripiton;
+		this.description = description;
 	}
 
 	public Long getId() {
@@ -32,19 +32,19 @@ public class Style implements Serializable{
 		this.id = id;
 	}
 
-	public String getDescripiton() {
-		return descripiton;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescripiton(String descripiton) {
-		this.descripiton = descripiton;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descripiton == null) ? 0 : descripiton.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -58,10 +58,10 @@ public class Style implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Style other = (Style) obj;
-		if (descripiton == null) {
-			if (other.descripiton != null)
+		if (description == null) {
+			if (other.description != null)
 				return false;
-		} else if (!descripiton.equals(other.descripiton))
+		} else if (!description.equals(other.description))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -73,7 +73,7 @@ public class Style implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Style [id=" + id + ", descripiton=" + descripiton + "]";
+		return "Style [id=" + id + ", descripiton=" + description + "]";
 	}
 	
 

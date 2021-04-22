@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Music;
+import com.rauldionisio.louvores.entities.Style;
 import com.rauldionisio.louvores.repositories.MusicRepository;
 
 @Service
@@ -25,6 +26,14 @@ public class MusicService {
 	
 	public List<Music>findByArtist(Artist artist){
 		return repository.findByArtist(artist);
+	}
+	
+	public List<Music>findByMoment(String moment){
+		return repository.getByMoment(moment);
+	}
+	
+	public List<Music>findByStyle(Style style){
+		return repository.findByStyle(style);
 	}
 
 }
