@@ -24,6 +24,10 @@ public interface MusicRepository extends JpaRepository<Music, Integer>{
 	
 	List<Music> findByStyle(Style style);
 	
+	@Query("SELECT m FROM Music m "
+			+ "WHERE m.lyrics like concat('%',?1,'%')")
+	List<Music>getbyLirycs(String part);
+	
 	
 	
 }

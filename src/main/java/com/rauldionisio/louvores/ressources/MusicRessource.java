@@ -83,4 +83,10 @@ public class MusicRessource {
 		
 	}
 
+	@ResponseBody
+	@RequestMapping(path = "/findBylyrics", method = RequestMethod.GET)
+	public ResponseEntity<List<Music>>findBylyrics(@RequestParam("lyrics") String lyrics){
+		List<Music> musicList = service.findByLyrics(lyrics);	
+		return ResponseEntity.ok(musicList);
+	}
 }

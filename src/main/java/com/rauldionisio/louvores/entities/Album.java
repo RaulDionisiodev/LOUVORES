@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Album implements Serializable{
 
@@ -23,15 +26,19 @@ public class Album implements Serializable{
 	private String name;
 	
 	@ManyToOne 
+	@JsonIgnoreProperties({"style"})
 	private Artist artist;
 	
 	@ManyToOne
 	@JoinColumn(name="style_id")
+	@JsonProperty("album_style")
 	private Style style;
 	
 	@OneToMany
+	@JsonIgnoreProperties({"lyrics", "album", "artist"})
 	private List<Music>musicList = new ArrayList<>();
-	
+
+
 	public Album() {}
 
 	
@@ -82,6 +89,9 @@ public class Album implements Serializable{
 		this.style = style;
 	}
 
+	public List<Music> getMusicList() {
+		return musicList;
+	}
 
 	@Override
 	public int hashCode() {

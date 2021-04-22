@@ -35,5 +35,9 @@ public class MusicService {
 	public List<Music>findByStyle(Style style){
 		return repository.findByStyle(style);
 	}
+	
+	public List<Music>findByLyrics(String lyrics){
+		return repository.getbyLirycs(lyrics);
+	}
 
 }

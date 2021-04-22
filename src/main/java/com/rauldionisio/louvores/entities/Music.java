@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -24,8 +24,9 @@ public class Music implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@Lob
-	private StringBuffer lyrics;
+	
+	@Column(name = "lyrics", columnDefinition="varchar(max)")
+	private String lyrics;
 	
 	@JsonIgnoreProperties({"style"})
 	@ManyToOne
@@ -46,7 +47,7 @@ public class Music implements Serializable{
 	
 	public Music() {}
 
-	public Music(Long id, String name, StringBuffer lyrics) {
+	public Music(Long id, String name, String lyrics) {
 		this.id = id;
 		this.name = name;
 		this.lyrics = lyrics;
@@ -69,10 +70,10 @@ public class Music implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public StringBuffer getLyrics() {
+	public String getLyrics() {
 		return lyrics;
 	}
-	public void setLyrics(StringBuffer lyrics) {
+	public void setLyrics(String lyrics) {
 		this.lyrics = lyrics;
 	}
 	

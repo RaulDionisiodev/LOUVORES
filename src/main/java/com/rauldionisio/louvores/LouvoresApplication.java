@@ -57,7 +57,7 @@ public class LouvoresApplication implements CommandLineRunner {
 		Moment moment2 = new Moment(null, "Adoração");
 		Moment cura = new Moment (null, "Cura e Libertação");
 		momentRepository.saveAll(Arrays.asList(moment, moment2, cura));
-		Music amar = new Music(null, "Amar-te Mais", new StringBuffer(
+		Music amar = new Music(null, "Amar-te Mais", new String(
 				"Amar-te mais, que a mim mesmo\n"
 				+ "Amar-te mais, que tudo que há aqui\n"
 				+ "Amar-te mais, que aos mais queridos\n"
@@ -75,8 +75,9 @@ public class LouvoresApplication implements CommandLineRunner {
 		amar.setArtist(davidson);
 		amar.setStyle(style);
 		amar.setAlbum(aguas);
+		aguas.getMusicList().add(amar);
 		
-		Music mais = new Music(null, "Mais e Mais e Mais", new StringBuffer(
+		Music mais = new Music(null, "Mais e Mais e Mais", new String(
 				"Mais e mais e mais\n"
 				+ "Mais e mais e mais\n"
 				+ "Eu vou te buscar\n"
@@ -119,7 +120,7 @@ public class LouvoresApplication implements CommandLineRunner {
 		mais.setArtist(frutos);
 		mais.setStyle(frutos.getStyle());
 		
-		Music principe = new Music(null, "Príncipe da paz", new StringBuffer(
+		Music principe = new Music(null, "Príncipe da paz", new String(
 				"Eu volto cansado de tentar\n"
 				+ "Livrar me das culpas, me libertar\n"
 				+ "Mas nada poderá lavar me, se não teu sangue\n"
@@ -141,7 +142,7 @@ public class LouvoresApplication implements CommandLineRunner {
 		principe.setArtist(id2);
 		principe.setStyle(id2.getStyle());
 		
-		Music resp = new Music(null, "Respirar", new StringBuffer(
+		Music resp = new Music(null, "Respirar", new String(
 				"Te amo Deus com o meu respirar\n"
 				+ "Amado meu vivo pra te adorar\n"
 				+ "\n"
@@ -164,12 +165,18 @@ public class LouvoresApplication implements CommandLineRunner {
 		resp.setArtist(gil);
 		resp.setStyle(style5);
 		
+		
+		
 		musicRepository.saveAll(Arrays.asList(amar, mais, principe, resp));
 		amar.getMomentList().add(moment2);
 		amar.getMomentList().add(moment);
 		mais.getMomentList().add(moment);
 		principe.getMomentList().add(cura);
 		resp.getMomentList().addAll(Arrays.asList(moment, moment2));
+		respirar.getMusicList().add(resp);
+		gratidao.getMusicList().add(principe);
+		bracos.getMusicList().add(mais);
+		albumRepository.saveAll(Arrays.asList(aguas, bracos, gratidao, respirar));
 		musicRepository.saveAll(Arrays.asList(amar, mais, principe, resp));
 		
 	}
