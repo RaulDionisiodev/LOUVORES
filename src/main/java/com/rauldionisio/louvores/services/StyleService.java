@@ -22,5 +22,8 @@ public class StyleService {
 		return repository.findByDescriptionContainingIgnoreCase(name);
 	}
 	
+	public Style insert(Style style) {
+		return repository.save(style);
+	}
 
 }
