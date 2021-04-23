@@ -22,5 +22,8 @@ public class MomentService {
 		return repository.findByDescriptionContainingIgnoreCase(name);
 	}
 	
+	public Moment insert(Moment moment) {
+		return repository.save(moment);
+	}
 
 }

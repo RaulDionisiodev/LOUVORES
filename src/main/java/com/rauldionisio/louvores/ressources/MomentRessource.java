@@ -3,6 +3,7 @@ package com.rauldionisio.louvores.ressources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,29 @@ public class MomentRessource {
 	public ResponseEntity<List<Moment>>findbyname(@RequestParam("name") String name){
 		List<Moment> moment = service.findByName(name);
 		return ResponseEntity.ok(moment);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(path = "/insert", method = RequestMethod.POST)
+	public ResponseEntity<String>insert(@RequestParam("name")String name){
+		List<Moment> momentList = service.findByName(name);
+		boolean exist = false;
+		for(Moment m : momentList) {
+			if(m.getDescription().equals(name)) {
+				exist = true;
+				break;
+			}
+		}
+
+		if(!exist && momentList.isEmpty()) {
+		   Moment moment = new Moment(null, name);
+		   moment = service.insert(moment);
+		   return ResponseEntity.status(HttpStatus.CREATED).body("Momento inserido com sucesso");
+		}else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Momento já existente");
+		}
+		
 		
 	}
 

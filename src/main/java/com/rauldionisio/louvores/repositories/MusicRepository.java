@@ -22,6 +22,14 @@ public interface MusicRepository extends JpaRepository<Music, Integer>{
 			+ "where LOWER(moment.description) like  LOWER(concat('%',?1,'%'))")
 	List<Music>getByMoment(String moment);
 	
+	// TODO - testar isso no mysql quando acabar pq o h2 não aceita collate
+//	@Query(value = "select * from music m "
+//			+ "inner join MUSIC_MOMENT_LIST mml on m.id = mml.music_id "
+//			+ "inner join MOMENT mom on mom.id = mml.moment_list_id "
+//			+ "where mom.description like  CAST LOWER(concat('%',?1,'%'))"
+//			+ " COLLATE Latin1_General_CI_AI", nativeQuery = true)
+//	List<Music>getByMoment(String moment);
+	
 	List<Music> findByStyle(Style style);
 	
 	@Query("SELECT m FROM Music m "
