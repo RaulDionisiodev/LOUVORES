@@ -1,6 +1,7 @@
 package com.rauldionisio.louvores.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class StyleService {
 	
 	public Style insert(Style style) {
 		return repository.save(style);
+	}
+	
+	public Optional<Style> findById(Long id) {
+		return repository.findById(id);
 	}
 
 }

@@ -21,6 +21,10 @@ public class ArtistService {
 	public List<Artist>findByName(String name){
 		return repository.findByNameContainingIgnoreCase(name);
 	}
+	
+	public Artist insert(Artist artist) {
+		return repository.save(artist);
+	}
 
 
 }
