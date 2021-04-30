@@ -11,5 +11,8 @@ import com.rauldionisio.louvores.entities.Artist;
 public interface ArtistRepository extends JpaRepository<Artist, Integer>{
 	
 	List<Artist>findByNameContainingIgnoreCase(String name);
+	
+	Artist findById(Long id);
+	
 
 }

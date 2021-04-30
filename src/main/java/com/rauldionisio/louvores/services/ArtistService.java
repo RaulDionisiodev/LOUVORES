@@ -25,6 +25,10 @@ public class ArtistService {
 	public Artist insert(Artist artist) {
 		return repository.save(artist);
 	}
+	
+	public Artist findById(Long id) {
+		return repository.findById(id);
+	}
 
 
 }

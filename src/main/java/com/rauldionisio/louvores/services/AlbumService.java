@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rauldionisio.louvores.entities.Album;
+import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.repositories.AlbumRepository;
 
 
@@ -23,5 +24,8 @@ public class AlbumService {
 		return repository.findByNameContainingIgnoreCase(name);
 	}
 
+	public Album insert(Album album) {
+		return repository.save(album);
+	}
 
 }
