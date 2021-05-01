@@ -43,5 +43,9 @@ public class MusicService {
 	public Music insert(Music music) {
 		return repository.save(music);
 	}
+	
+	public List<Music>getLastTemMusics(){
+		return repository.getLastTemMusics();
+	}
 
 }

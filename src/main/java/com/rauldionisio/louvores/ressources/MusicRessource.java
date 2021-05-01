@@ -134,4 +134,11 @@ public class MusicRessource {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(path = "/getLastTemMusics", method = RequestMethod.GET)
+	public ResponseEntity<List<Music>>getLastTemMusics(){
+		List<Music> musicList = service.getLastTemMusics();	
+		return ResponseEntity.ok(musicList);
+	}
+	
 }

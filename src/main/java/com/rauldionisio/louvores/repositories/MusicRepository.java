@@ -36,6 +36,8 @@ public interface MusicRepository extends JpaRepository<Music, Integer>{
 			+ "WHERE m.lyrics like concat('%',?1,'%')")
 	List<Music>getbyLirycs(String part);
 	
+	@Query(value = "SELECT TOP(10) * FROM music m ORDER BY m.id DESC", nativeQuery = true)
+	List<Music>getLastTemMusics();
 	
 	
 }
