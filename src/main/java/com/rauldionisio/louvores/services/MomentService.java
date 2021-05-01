@@ -25,5 +25,9 @@ public class MomentService {
 	public Moment insert(Moment moment) {
 		return repository.save(moment);
 	}
+	
+	public Moment findById(Long id) {
+		return repository.findById(id);
+	}
 
 }

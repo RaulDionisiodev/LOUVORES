@@ -21,7 +21,6 @@ import com.rauldionisio.louvores.services.ArtistService;
 import com.rauldionisio.louvores.services.StyleService;
 
 import DTO.AlbumDTO;
-import DTO.ArtistDTO;
 
 @RestController
 @RequestMapping(value ="/album")

@@ -71,10 +71,7 @@ public class LouvoresApplication implements CommandLineRunner {
 				+ "De todo o coração\n"
 				+ "Viverei eu só pra te amar\n"
 				+ "Amar-te, amar-te, amar-te\n"
-				+ "E dar a vida só por ti"));
-		amar.setArtist(davidson);
-		amar.setStyle(style);
-		amar.setAlbum(aguas);
+				+ "E dar a vida só por ti"), davidson, aguas, style);
 		aguas.getMusicList().add(amar);
 		
 		Music mais = new Music(null, "Mais e Mais e Mais", new String(
@@ -115,10 +112,8 @@ public class LouvoresApplication implements CommandLineRunner {
 				+ "Eu vou (mais) te buscar\n"
 				+ "Verdadeiramente, decididamente\n"
 				+ "Eu vou te buscar\n"
-				));
-		mais.setAlbum(bracos);
-		mais.setArtist(frutos);
-		mais.setStyle(frutos.getStyle());
+				),frutos, bracos, frutos.getStyle());
+
 		
 		Music principe = new Music(null, "Príncipe da paz", new String(
 				"Eu volto cansado de tentar\n"
@@ -137,10 +132,8 @@ public class LouvoresApplication implements CommandLineRunner {
 				+ "Cura-me homem de Nazaré\n"
 				+ "Cura me príncipe da paz\n"
 				+ "Cura me, cura-me\n"
-				));
-		principe.setAlbum(gratidao);
-		principe.setArtist(id2);
-		principe.setStyle(id2.getStyle());
+				), id2, gratidao,id2.getStyle() );
+
 		
 		Music resp = new Music(null, "Respirar", new String(
 				"Te amo Deus com o meu respirar\n"
@@ -160,13 +153,9 @@ public class LouvoresApplication implements CommandLineRunner {
 				+ "Amor tão forte, me abraça até o fim\n"
 				+ "\n"
 				+ "Te amo Deus com o meu respirar\n"
-				+ "Amado meu vivo pra te adorar"));
-		resp.setAlbum(respirar);
-		resp.setArtist(gil);
-		resp.setStyle(style5);
+				+ "Amado meu vivo pra te adorar"), gil, respirar, style5);
 		
-		
-		
+			
 		musicRepository.saveAll(Arrays.asList(amar, mais, principe, resp));
 		amar.getMomentList().add(moment2);
 		amar.getMomentList().add(moment);

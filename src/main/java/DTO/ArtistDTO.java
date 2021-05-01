@@ -4,14 +4,14 @@ public class ArtistDTO {
 	
 	private Long id;
 	private String name;
-	private Long style_id;
+	private Long styleId;
 	
 	public ArtistDTO() {}
 
-	public ArtistDTO(Long id, String name, Long style_id) {
+	public ArtistDTO(Long id, String name, Long styleId) {
 		this.id = id;
 		this.name = name;
-		this.style_id = style_id;
+		this.styleId = styleId;
 	}
 
 	public Long getId() {
@@ -30,12 +30,12 @@ public class ArtistDTO {
 		this.name = name;
 	}
 
-	public Long getStyle_id() {
-		return style_id;
+	public Long getstyleId() {
+		return styleId;
 	}
 
-	public void setStyle_id(Long style_id) {
-		this.style_id = style_id;
+	public void setstyleId(Long styleId) {
+		this.styleId = styleId;
 	}
 	
 

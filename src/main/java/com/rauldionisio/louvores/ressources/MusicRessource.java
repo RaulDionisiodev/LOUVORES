@@ -1,23 +1,33 @@
 package com.rauldionisio.louvores.ressources;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rauldionisio.louvores.entities.Album;
 import com.rauldionisio.louvores.entities.Artist;
+import com.rauldionisio.louvores.entities.Moment;
 import com.rauldionisio.louvores.entities.Music;
 import com.rauldionisio.louvores.entities.Style;
+import com.rauldionisio.louvores.services.AlbumService;
 import com.rauldionisio.louvores.services.ArtistService;
+import com.rauldionisio.louvores.services.MomentService;
 import com.rauldionisio.louvores.services.MusicService;
 import com.rauldionisio.louvores.services.StyleService;
+
+import DTO.MusicDTO;
 
 @RestController
 @RequestMapping(value ="/music")
@@ -31,6 +41,12 @@ public class MusicRessource {
 	
 	@Autowired
 	private StyleService styleService;
+	
+	@Autowired
+	private AlbumService albumservice;
+	
+	@Autowired
+	private MomentService momentservice;
 	
 	
 	@GetMapping
@@ -89,4 +105,33 @@ public class MusicRessource {
 		List<Music> musicList = service.findByLyrics(lyrics);	
 		return ResponseEntity.ok(musicList);
 	}
+	
+	@ResponseBody
+	@RequestMapping(path = "/insert", method = RequestMethod.POST)
+	public ResponseEntity<String>insert(@RequestBody MusicDTO musicDto){
+		
+		Artist artist = artistService.findById(musicDto.getArtistId());
+		Album album = albumservice.findById(musicDto.getAlbumId());
+		Style style = styleService.findById(musicDto.getStyleId()).orElse(null);
+		Set<Moment> moments = new HashSet<>();
+		
+		for(Long ids : musicDto.getMomentIds()) {
+			moments.add(momentservice.findById(ids));
+		}
+		
+		Music music = new Music(null, musicDto.getName(), musicDto.getLyrics(), artist, album, style);
+		music.getMomentList().addAll(moments);
+		
+		try {
+			service.insert(music);
+			album.getMusicList().add(music);
+			albumservice.insert(album);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Música inserida com sucesso");
+		}catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao inserir música");
+
+		}
+	}
+	
+	
 }

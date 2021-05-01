@@ -46,10 +46,13 @@ public class Music implements Serializable{
 	
 	public Music() {}
 
-	public Music(Long id, String name, String lyrics) {
+	public Music(Long id, String name, String lyrics, Artist artist, Album album, Style style) {
 		this.id = id;
 		this.name = name;
 		this.lyrics = lyrics;
+		this.artist = artist;
+		this.album = album;
+		this.style = style;
 	}
 
 

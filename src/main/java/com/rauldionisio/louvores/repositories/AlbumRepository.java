@@ -12,4 +12,7 @@ public interface AlbumRepository extends JpaRepository<Album, Integer>{
 
 	List<Album>findByNameContainingIgnoreCase(String name);
 	
+	Album findById(Long id);
+	
+	
 }

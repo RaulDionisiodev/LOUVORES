@@ -51,7 +51,7 @@ public class ArtistRessource {
 		if(artists.isEmpty()) {
 			Artist artist = new Artist();
 			artist.setName(artistDto.getName());
-			artist.setStyle(styleService.findById(artistDto.getStyle_id()).orElse(null));
+			artist.setStyle(styleService.findById(artistDto.getstyleId()).orElse(null));
 			try {
 			artist = service.insert(artist);
 				return ResponseEntity.status(HttpStatus.CREATED).body("Artista inserido com sucesso");

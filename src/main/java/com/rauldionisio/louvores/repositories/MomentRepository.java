@@ -12,4 +12,7 @@ public interface MomentRepository extends JpaRepository<Moment, Integer>{
 
 	List<Moment> findByDescriptionContainingIgnoreCase(String description);
 	
+	Moment findById(Long id);
+	
+	
 }

@@ -39,5 +39,9 @@ public class MusicService {
 	public List<Music>findByLyrics(String lyrics){
 		return repository.getbyLirycs(lyrics);
 	}
+	
+	public Music insert(Music music) {
+		return repository.save(music);
+	}
 
 }
