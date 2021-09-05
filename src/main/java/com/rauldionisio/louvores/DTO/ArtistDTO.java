@@ -1,4 +1,4 @@
-package DTO;
+package com.rauldionisio.louvores.DTO;
 
 public class ArtistDTO {
 	

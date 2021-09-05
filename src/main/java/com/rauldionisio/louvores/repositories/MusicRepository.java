@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.rauldionisio.louvores.DTO.MusicDetailsDTO;
 import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Music;
 import com.rauldionisio.louvores.entities.Style;
@@ -36,8 +37,12 @@ public interface MusicRepository extends JpaRepository<Music, Integer>{
 			+ "WHERE m.lyrics like concat('%',?1,'%')")
 	List<Music>getbyLirycs(String part);
 	
-	@Query(value = "SELECT TOP(10) * FROM music m ORDER BY m.id DESC", nativeQuery = true)
-	List<Music>getLastTemMusics();
+	@Query(value = "SELECT top(10) m.name as name, a.name as artist , ar.name as album "
+			+ "FROM music m "
+			+ "inner join Album a on a.id = m.album_id "
+			+ "inner join Artist ar on  ar.id = m.artist_id "
+			+ "ORDER BY m.id DESC", nativeQuery = true)
+	List<String[]>getLastTemMusics();
 	
 	
 }

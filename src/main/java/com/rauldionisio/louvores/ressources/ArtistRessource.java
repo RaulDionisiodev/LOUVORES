@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rauldionisio.louvores.DTO.ArtistDTO;
 import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.services.ArtistService;
 import com.rauldionisio.louvores.services.StyleService;
-
-import DTO.ArtistDTO;
 
 @RestController
 @RequestMapping(value ="/artist")

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rauldionisio.louvores.DTO.MusicDTO;
+import com.rauldionisio.louvores.DTO.MusicDetailsDTO;
 import com.rauldionisio.louvores.entities.Album;
 import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Moment;
@@ -26,8 +28,6 @@ import com.rauldionisio.louvores.services.ArtistService;
 import com.rauldionisio.louvores.services.MomentService;
 import com.rauldionisio.louvores.services.MusicService;
 import com.rauldionisio.louvores.services.StyleService;
-
-import DTO.MusicDTO;
 
 @RestController
 @RequestMapping(value ="/music")
@@ -135,9 +135,9 @@ public class MusicRessource {
 	
 	
 	@ResponseBody
-	@RequestMapping(path = "/getLastTemMusics", method = RequestMethod.GET)
-	public ResponseEntity<List<Music>>getLastTemMusics(){
-		List<Music> musicList = service.getLastTemMusics();	
+	@GetMapping(path = "/getLastTemMusics")
+	public ResponseEntity<List<MusicDetailsDTO>>getLastTemMusics(){
+		List<MusicDetailsDTO> musicList = service.getLastTemMusics();	
 		return ResponseEntity.ok(musicList);
 	}
 	

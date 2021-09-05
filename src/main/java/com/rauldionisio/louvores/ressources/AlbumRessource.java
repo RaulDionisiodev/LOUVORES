@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rauldionisio.louvores.DTO.AlbumDTO;
 import com.rauldionisio.louvores.entities.Album;
 import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Style;
 import com.rauldionisio.louvores.services.AlbumService;
 import com.rauldionisio.louvores.services.ArtistService;
 import com.rauldionisio.louvores.services.StyleService;
-
-import DTO.AlbumDTO;
 
 @RestController
 @RequestMapping(value ="/album")

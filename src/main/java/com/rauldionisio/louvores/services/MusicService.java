@@ -1,10 +1,12 @@
 package com.rauldionisio.louvores.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rauldionisio.louvores.DTO.MusicDetailsDTO;
 import com.rauldionisio.louvores.entities.Artist;
 import com.rauldionisio.louvores.entities.Music;
 import com.rauldionisio.louvores.entities.Style;
@@ -44,8 +46,19 @@ public class MusicService {
 		return repository.save(music);
 	}
 	
-	public List<Music>getLastTemMusics(){
-		return repository.getLastTemMusics();
+	public List<MusicDetailsDTO>getLastTemMusics(){
+		List<MusicDetailsDTO> dtoList = new ArrayList<>();
+		List<String[]> musics = repository.getLastTemMusics();
+		for(String[] music: musics) {
+			MusicDetailsDTO dto = new MusicDetailsDTO();
+			dto.setName(music[0]);
+			dto.setArtist(music[1]);
+			dto.setAlbum(music[2]);
+			
+			dtoList.add(dto);
+		}
+		
+		return dtoList;
 	}
 
 }

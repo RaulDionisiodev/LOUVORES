@@ -1,4 +1,4 @@
-package DTO;
+package com.rauldionisio.louvores.DTO;
 
 import java.util.HashSet;
 import java.util.Set;
