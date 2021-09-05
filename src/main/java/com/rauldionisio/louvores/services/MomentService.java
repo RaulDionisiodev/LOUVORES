@@ -29,5 +29,9 @@ public class MomentService {
 	public Moment findById(Long id) {
 		return repository.findById(id);
 	}
+	
+	public List<String> getLastTemMoments(){
+		return repository.getLastTemMoments();
+	}
 
 }

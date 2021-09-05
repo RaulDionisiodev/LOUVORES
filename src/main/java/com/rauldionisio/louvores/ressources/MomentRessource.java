@@ -59,5 +59,12 @@ public class MomentRessource {
 		
 		
 	}
+	
+	@ResponseBody
+	@GetMapping(path = "/getLastTemMoments")
+	public List<String>getLastTemMoments(){
+		return service.getLastTemMoments();
+		
+	}
 
 }
