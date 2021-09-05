@@ -30,5 +30,9 @@ public class StyleService {
 	public Optional<Style> findById(Long id) {
 		return repository.findById(id);
 	}
+	
+	public List<String> getLastTemStyles(){
+		return repository.getLastTemStyles();
+	}
 
 }

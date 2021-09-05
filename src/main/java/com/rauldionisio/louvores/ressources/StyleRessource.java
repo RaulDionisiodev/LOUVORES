@@ -55,9 +55,13 @@ public class StyleRessource {
 		   return ResponseEntity.status(HttpStatus.CREATED).body("Estilo inserido com sucesso");
 		}else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Estilo já existente");
-		}
-		
-		
+		}	
 	}
 
+	@ResponseBody
+	@GetMapping(path = "getLastTemStyles")
+	public List<String>getLastTemStyles(){
+		return service.getLastTemStyles();
+	}
+	
 }
